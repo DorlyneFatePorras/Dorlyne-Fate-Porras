@@ -1,0 +1,177 @@
+---
+title: "RWorksheet_Porras#5"
+author: "Porras, Dorlyne Fate"
+date: "2022-11-23"
+output: pdf_document
+---
+
+1. The table shows the enrollment of BS in Computer Science, SY 2010-2011
+
+```{r, error = TRUE}
+
+enrollment <- data.frame("Course Year" = c("1st","2nd","3rd","4th"),
+                         "2019-2020" = c(80, 75, 70, 60))
+enrollment
+```
+
+a. Plot the data using a bar graph. Write the codes and copy the result.
+
+```{r, error = TRUE}
+data <- c("1st" = 80, "2nd" = 75, "3rd" = 70, "4th" = 60)
+data
+barplot(data)
+```
+
+
+b. Using the same table, label the barchart with
+
+Title = ” Enrollment of BS Computer Science
+horizontal axis = “Curriculum Year” and
+vertical axis = “number of students”
+
+```{r, vector = TRUE}
+bar <- c("1st" = 80, "2nd" = 75, "3rd" = 70, "4th" = 60)
+bar
+barplot(bar, main = "Enrollment of BS Computer Science", xlab = "Number of Students", 
+        ylab = "Course Year")
+```
+
+2. The monthly income of De Jesus family was spent on the following: 60% on Food,
+10% on electricity, 5% for savings, and 25% for other miscellaneous expenses.
+
+a. Create a table for the above scenario. Write the codes and its result.
+
+```{r, vector = TRUE}
+
+income_data <- data.frame(facts = c("Food", "Electricity", "Savings", 
+                                    "MiscellaneousExpenses"), spent = c(60,10,5,25)
+                                )
+income_data
+
+tableData <- table(income_data)
+tableData
+
+```
+
+b. Plot the data using a pie chart. Add labels, colors and legend.
+Write the codes and its result.
+
+
+
+3. Open the mtcars dataset.
+
+```{r, vector = TRUE}
+data("mtcars")
+```
+
+
+a. Create a simple histogram specifically for mpg (miles per gallon) variable.
+Use $ to select the mpg only. Write the codes and its result.
+
+
+```{r, vector = TRUE}
+
+data_mtcars <- (mtcars$mpg)
+data_mtcars
+
+hist(data_mtcars, breaks = 12)
+```
+
+
+b. Colored histogram with different number of bins.
+```{r, vector = TRUE}
+hist(mtcars$mpg, breaks=12, col="red")
+hist(data_mtcars, breaks = 12, col = "purple")
+
+```
+
+c. Add a Normal Curve
+x <- mtcars$mpg
+h<-hist(x, breaks=10, col="red", xlab="Miles Per Gallon",
+        main="Histogram with Normal Curve")
+xfit<-seq(min(x),max(x),length=40)
+yfit<-dnorm(xfit,mean=mean(x),sd=sd(x))
+yfit <- yfit*diff(h$mids[1:2])*length(x)
+lines(xfit, yfit, col="blue", lwd=2)
+
+Copy the result.
+
+```{r, vector = TRUE}
+data_curve <- data_mtcars
+data_curve
+```
+
+```{r, vector = TRUE}
+data_curve <- data_mtcars
+data_curve
+
+data_hist <-hist(data_curve, breaks=10, col="red", xlab="Miles Per Gallon",
+    main="Histogram with Normal Curve")
+    xfit<-seq(min(data_curve),max(data_curve),length=40)
+    yfit<-dnorm(xfit,mean=mean(data_curve),sd=sd(data_curve))
+    yfit <- yfit*diff(data_hist$mids[1:2])*length(data_curve)
+    lines(xfit, yfit, col="blue", lwd=2)
+data_hist
+
+```
+4. Open the iris dataset. Create a subset for each species.
+
+a. Write the codes and its result.
+
+data("iris")
+
+```{r, vector = TRUE}
+iris_data <- data.frame(iris)
+iris_data
+```
+
+```{r, vector = TRUE}
+data_setosa <- subset(iris_data, Species == 'setosa' )
+data_setosa
+
+data_versicolor <- subset(iris_data, Species == 'versicolor' )
+data_versicolor
+
+data_virginica <- subset(iris_data, Species == 'virginica' )
+data_virginica
+
+```
+
+b. Get the mean for every characteristics of each species using colMeans().
+
+Write the codes and its result.
+
+Example: setosa <- colMeans(setosa[sapply(setosaDF,is.numeric)])
+
+```{r, vector = TRUE}
+data_setosa <- colMeans(data_setosa[sapply(data_setosa,is.numeric)])
+data_setosa
+
+data_versicolor <- colMeans(data_versicolor[sapply(data_versicolor,is.numeric)])
+data_versicolor
+
+data_virginica <- colMeans(data_virginica[sapply(data_virginica,is.numeric)])
+data_virginica
+```
+
+c. Combine all species by using rbind()
+The table should be look like this:
+
+```{r, vector = TRUE}
+combine <- rbind(data_setosa,data_versicolor,data_virginica)
+iris <- data.frame(combine)
+iris
+```
+
+d. From the data in 4-c: Create the barplot().
+Write the codes and its result.
+The barplot should be like this.
+
+```{r, vector = TRUE}
+barplot(height = as.matrix(iris),
+        main = "Iris Data",
+        ylab = "Mean Scores",
+        xlab = "Characteristics",
+        beside = T, col = rainbow(3)
+        )
+```
