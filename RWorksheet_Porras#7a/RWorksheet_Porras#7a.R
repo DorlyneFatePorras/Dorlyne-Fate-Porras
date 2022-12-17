@@ -1,0 +1,305 @@
+
+RWorksheet_Porras#7a
+
+
+#1.  Create a data frame for the table below.
+
+Student <- c(1:10)
+Student
+
+Pre_Test <- c(55, 54, 47, 57, 51, 61, 57, 54, 63, 58)
+Pre_Test
+
+Post_Test <- c(61, 60, 56, 63, 56, 63, 59, 56 ,62, 61)
+Post_Test
+
+data1 <- data.frame(Student, Pre_Test, Post_Test)
+data1
+
+
+
+
+#a. Compute the descriptive statistics using different packages (Hmisc and pastecs).
+#Write the codes and its result.
+
+install.packages("Hmisc")
+install.packages("pastecs")
+library(Hmisc)
+library(pastecs)
+
+
+
+ahj <-describe(data1)
+ahj
+bcd <-stat.desc(data1)
+bcd
+
+
+
+#2. The Department of Agriculture was studying the effects of several levels of a fertilizer on the growth of a plant. For some analyses, it might be useful to convertthe fertilizer levels to an ordered factor.
+# The data were 10,10,10, 20,20,50,10,20,10,50,20,50,20,10.
+
+#a. Write the codes and describe the result.
+#   Answer: categorize the data and  display the factor's values
+
+Fertilizer_data <- c(10, 10, 10 ,20 ,20, 50, 10, 20, 10, 50, 20, 50, 10)
+Fertilizer_data
+
+fer_data <- factor(Fertilizer_data)
+fer_data
+
+
+#3. Abdul Hassan, president of Floor Coverings Unlimited, has asked you to study the exercise levels undertaken by 10 subjects were “l”, “n”, “n”, “i”, “l” , “l”, “n”, “n”, “i”, “l” ; n=none, l=light, i=intense
+
+
+Sub <-c( "l", "n", "n", "i", "l" ,"l", "n", "n", "i", "l" )
+Sub
+
+
+
+#a. What is the best way to represent this in R?
+#Answer: factor 
+
+
+fer_data1 <- factor(Sub)
+fer_data1
+date = levels(fer_data1) =c("none","light","intense")
+date
+
+
+
+#4. Sample of 30 tax accountants from all the states and territories of Australia and their individual state of origin is specified by a character vector of state mnemonics
+#as:
+#
+
+
+state <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa", "qld",
+           "vic", "nsw", "vic", "qld", "qld", "sa", "tas", "sa", "nt",
+           "wa", "vic", "qld", "nsw", "nsw", "wa", "sa", "act", "nsw",
+           "vic", "vic", "act")
+state
+
+
+
+
+#a. Apply the factor function and factor level. Describe the results.
+
+#Answer:  categorize the data and  display the factor's values
+
+state_data <- factor(state)
+state_data
+
+levels(state_data)
+
+
+#5. From #4 - continuation:
+
+#Suppose we have the incomes of the same tax accountants in another vector (in
+suitably large units of money)
+
+incomes <- c(60, 49, 40, 61, 64, 60, 59, 54,
+             62, 69, 70, 42, 56, 61, 61, 61, 58, 51, 48,
+             65, 49, 49, 41, 48, 52, 46, 59, 46, 58, 43)
+
+
+
+incomes <- c(60, 49, 40, 61, 64, 60, 59, 54,
+             62, 69, 70, 42, 56, 61, 61, 61, 58, 51, 48,
+             65, 49, 49, 41, 48, 52, 46, 59, 46, 58, 43)
+
+incomes
+
+
+
+#a. Calculate the sample mean income for each state we can now use the special
+#function tapply():
+
+incomes_means <- tapply(incomes, state_data, mean)
+incomes_means
+
+#b. Copy the results and interpret.
+
+#Answer: 
+# REsult:  
+act      nsw       nt      qld       sa      tas      vic       wa 
+
+# 44.50000 57.33333 55.50000 53.60000 55.00000 60.50000 56.00000 52.25000 
+
+#It give the mean of each group 
+
+
+
+
+#6. Calculate the standard errors of the state income means (refer again to number 3)
+#stdError <- function(x) sqrt(var(x)/length(x))
+#Note: After this assignment, the standard errors are calculated by:
+# incster <- tapply(incomes, statef, stdError)
+
+
+stdError <- function(x) sqrt(var(x)/length(x))
+
+waw <- tapply(Sub, fer_data1, stdError)
+waw
+
+
+
+#a. What is the standard error? Write the codes.
+
+waw <- tapply(Sub, fdata1, stdError)
+waw
+
+
+
+#b. Interpret the result. 
+#The Result:
+#  none   light intense 
+#  NA      NA      NA 
+
+#The result is NA because the data inside the object in #3 is Character
+
+
+
+
+#7. Use the titanic dataset.  
+
+data("Titanic")
+
+titanic_data <- data.frame(Titanic)
+titanic_data
+ 
+
+
+#a. subset the titanic dataset of those who survived and not survived. Show the
+#codes and its result.
+
+
+Titanic_data<- subset(titanic_data, select = "Survived")
+
+Titanic_data
+
+#8. The data sets are about the breast cancer Wisconsin. The samples arrive periodically as Dr. Wolberg reports his clinical cases. The database therefore reflects this chronological grouping of the data. You can create this dataset in Microsoft Excel.
+
+
+#a. describe what is the dataset all about.
+#Answer:The dataset is all about Breast canser sample
+
+#b. Import the data from MS Excel. Copy the codes.
+
+
+getwd()
+
+importData <- read.table("/cloud/project/RWorksheet_Porras#7a/BreastCancer.xlsx-Sheet_1.csv",
+                         header = TRUE, sep=",")
+importData
+
+
+#c. Compute the descriptive statistics using different packages. Find the values of:
+
+#c.1 Standard error of the mean for clump thickness.
+#c.2 Coefficient of variability for Marginal Adhesion.
+#c.3 Number of null values of Bare Nuclei.
+#c.4 Mean and standard deviation for Bland Chromatin
+#c.5 Confidence interval of the mean for Uniformity of Cell Shape
+
+
+
+
+
+
+
+#c.1 Standard error of the mean for clump thickness.
+
+
+stdError <- function(x) sqrt(var(x)/length(x))
+stdError(importData)
+data_12 <-(importData$CL..thickness)
+data_12
+
+data_21 <- factor(data_12)
+data_21
+
+inco <- tapply(data_12, data_21, stdError)
+inco
+clumps <- mean(data_12)
+clumps
+
+
+#c.2 Coefficient of variability for Marginal Adhesion.
+
+DP <-sapply(importData, function(x) sd(x) / mean(x) * 100)
+DP
+
+#c.3 Number of null values of Bare Nuclei.
+
+
+Nog <- (importData$Bare..Nuclei)
+Nog
+
+nums <-sum(Nog%in% c(NA))
+nums
+
+none <-is.null(list(Nog)) 
+none
+
+
+
+#c.4 Mean and standard deviation for Bland Chromatin
+
+ndata <- (importData$Bl..Cromatin)
+ndata
+
+Back <- mean(ndata)
+Back
+
+SF <- sf(ndata)
+SF
+
+
+#c.5 Confidence interval of the mean for Uniformity of Cell Shape
+
+
+Cal_Mean <- mean(importData$Cell.Shape)
+Cal_Mean
+
+#d. How many attributes?
+
+Attri <-attributes(importData)
+Attri
+
+
+#e. Find the percentage of respondents who are malignant. Interpret the results.
+
+abc_1 <- (importData$Class)
+abc_1
+nrows_1 <-nrow(importData)
+nrows_1
+pop <- sum(c(abc_1 == "malignant")/nrows_1*100)
+pop
+
+
+#9. Export the data abalone to the Microsoft excel file. Copy the codes.
+#install.packages("AppliedPredictiveModeling")
+#library("AppliedPredictiveModeling")
+#view(abalone)
+#head(abalone)
+#summary(abalone)
+
+
+install.packages("AppliedPredictiveModeling")
+library("AppliedPredictiveModeling")
+data(abalone)
+View(abalone)
+head(abalone)
+summary(abalone)
+
+install.packages("readxl")
+install.packages("xlsxjars")
+install.packages("xlsx")
+library(readxl)
+library(xlsx)
+write.xlsx(abalone,"C:\\dorlyne\\RWorksheet_Porras#7a\\abalone.xlsx")
+
+
+
+
+
